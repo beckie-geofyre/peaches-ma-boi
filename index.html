@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231f4a3d'/%3E%3Ccircle cx='50.0' cy='16.0' r='9' fill='%23ff8a2a'/%3E%3Ccircle cx='70.0' cy='22.5' r='9' fill='%23ff8a2a'/%3E%3Ccircle cx='82.3' cy='39.5' r='9' fill='%23ff8a2a'/%3E%3Ccircle cx='82.3' cy='60.5' r='9' fill='%23ff8a2a'/%3E%3Ccircle cx='70.0' cy='77.5' r='9' fill='%23ff8a2a'/%3E%3Ccircle cx='50.0' cy='84.0' r='9' fill='%23ff8a2a'/%3E%3Ccircle cx='30.0' cy='77.5' r='9' fill='%23ff8a2a'/%3E%3Ccircle cx='17.7' cy='60.5' r='9' fill='%23ff8a2a'/%3E%3Ccircle cx='17.7' cy='39.5' r='9' fill='%23ff8a2a'/%3E%3Ccircle cx='30.0' cy='22.5' r='9' fill='%23ff8a2a'/%3E%3C/svg%3E">
+<title>Geofyre</title>
+<meta name="description" content="Geofyre Pte. Ltd. Submarine cable route engineering, desktop studies, permit feasibility and geological risk assessment, Singapore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&text=%E6%A6%AE&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500&family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark seabed ground, a single column of plain sections, the logo's ring of ten dots as the only ornament. */
+:root {
+  --ground: #102422;
+  --ground-2: #16302d;
+  --line: #2a4744;
+  --text: #e8efed;
+  --muted: #9db3af;
+  --ember: #ff8a2a;
+  --ember-hi: #ffb23f;
+  --display: "Source Sans 3", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Sans 3", "Source Sans Pro", "Segoe UI", Roboto, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ground: #f3f6f5; --ground-2: #e6eeec; --line: #c8d6d3;
+    --text: #12201f; --muted: #4f6662; --ember: #d9590f; --ember-hi: #e87a12;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --ground: #f3f6f5; --ground-2: #e6eeec; --line: #c8d6d3;
+  --text: #12201f; --muted: #4f6662; --ember: #d9590f; --ember-hi: #e87a12;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--text); font: 400 1rem/1.6 var(--body); margin: 0; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: var(--ember-hi); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+.eyebrow { font: 500 0.75rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ember); }
+
+header.top { border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18); }
+section, .hero { scroll-margin-top: 72px; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.head-right { display: flex; align-items: center; gap: 22px; }
+.head-cta { background: var(--ember); color: #102422; text-decoration: none; font-weight: 700; font-size: 0.85rem; line-height: 1.2; padding: 9px 14px; border-radius: 4px; white-space: nowrap; }
+.head-cta:hover { background: var(--ember-hi); }
+.head-cta .short { display: none; }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }
+.brand { display: flex; align-items: center; gap: 16px; text-decoration: none; color: var(--text); }
+.brand { --cream: #ede7d9; --sage: #a8bfb1; }
+.brand .han { font: 500 1.9rem/1 "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; color: var(--cream); }
+.brand .dia { width: 9px; height: 9px; background: var(--sage); transform: rotate(45deg); margin-inline: 4px; flex: none; }
+.brand .word { display: inline-block; white-space: nowrap; font: 500 1.75rem/1 "Outfit", "Helvetica Neue", Arial, sans-serif; color: var(--cream); letter-spacing: 0.08em; }
+.brand .ge { color: var(--sage); }
+.brand .o { display: inline-block; width: 0.66em; height: 0.66em; margin: 0 0.1em 0 0.03em; vertical-align: -0.05em; overflow: visible; }
+.brand .o .chase { animation: chase 1.6s linear infinite; opacity: 0.5; }
+@keyframes chase { 0% { opacity: 1; } 45% { opacity: 0.5; } 100% { opacity: 0.5; } }
+@media (prefers-reduced-motion: reduce) { .brand .o .chase { animation: none; opacity: 1; } }
+nav { display: flex; gap: 20px; flex-wrap: wrap; }
+nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; }
+nav a:hover { color: var(--text); }
+
+.hero .wrap { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; padding-block: 72px 150px; }
+.hero h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); font-weight: 800; line-height: 1.05; margin-block: 16px 20px; }
+.hero p { color: var(--muted); font-size: 1.1rem; max-width: 34em; margin: 0; }
+.hero { position: relative; overflow: hidden; }
+.hero .seabed { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero .seabed .fibre-line { fill: none; stroke: #8fc2b0; stroke-width: 0.8; opacity: 0.12; }
+.hero .seabed .fibre-pulse { fill: none; stroke: #ffb23f; stroke-width: 2; stroke-linecap: round; opacity: 0.4; stroke-dasharray: 30 970; animation: travel 4s linear infinite; filter: drop-shadow(0 0 3px #ffb23f); }
+@keyframes travel { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .hero .seabed .fibre-pulse { animation: none; stroke-dasharray: none; opacity: 0.1; } }
+.hero .seabed .floor { fill: #0d1f1c; opacity: 0.55; }
+.hero .seabed .cable { fill: none; stroke: #ff8a2a; stroke-width: 2.2; opacity: 0.55; stroke-linecap: round; }
+.hero .seabed .cable-glow { fill: none; stroke: #ff8a2a; stroke-width: 9; opacity: 0.08; stroke-linecap: round; }
+.hero .seabed .rep { fill: #ffb23f; opacity: 0.75; }
+.hero .wrap { position: relative; }
+.xsec { width: 100%; max-width: 380px; justify-self: center; margin: 0; }
+.xsec svg { width: 100%; display: block; overflow: visible; }
+.xsec .layer { cursor: pointer; transition: opacity 0.25s; outline: none; }
+.xsec.focus .layer { opacity: 0.25; }
+.xsec.focus .layer.on { opacity: 1; }
+.xsec .layer:focus-visible .hit { stroke: var(--ember-hi); stroke-width: 0.8; }
+.xsec .hit { fill: transparent; stroke: none; }
+.xsec .fibre { animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@media (prefers-reduced-motion: reduce) { .xsec .fibre { animation: none; } .xsec .layer { transition: none; } }
+.xsec-types { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.xsec-types button { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--line); padding: 7px 10px; border-radius: 3px; cursor: pointer; }
+.xsec-types button:hover { color: var(--text); border-color: var(--muted); }
+.xsec-types button[aria-pressed="true"] { color: #102422; background: var(--ember-hi); border-color: var(--ember-hi); }
+.xsec-types button:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+.xsec svg { transition: opacity 0.2s; }
+.xsec figcaption { margin-top: 18px; min-height: 4.8em; border-left: 2px solid var(--ember); padding-left: 14px; }
+.xsec-name { display: block; font: 500 0.75rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ember-hi); }
+.xsec-desc { display: block; color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
+
+section { border-top: 1px solid var(--line); }
+section .wrap { padding-block: 64px; }
+section h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 700; margin-block: 12px 28px; }
+
+.services { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.svc { background: var(--ground); padding: 28px; min-width: 0; }
+.svc h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+.svc p { color: var(--muted); margin: 0 0 14px; }
+.svc .outputs { font: 400 0.8rem/1.5 var(--mono); color: var(--text); margin: 0; }
+.svc .outputs b { font-weight: 500; color: var(--ember); }
+
+.sectors { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0; }
+.sectors li { border: 1px solid var(--line); padding: 8px 14px; font-size: 0.95rem; }
+
+
+.band { --ground: #1f4a3d; --ground-2: #26594a; --line: #3a6b5c; --text: #f2f7f4; --muted: #c2d8cf; --ember: #ff9a3c; --ember-hi: #ffbe5c; background: var(--ground); color: var(--text); border-top: 0; }
+.summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 48px; margin: 0; }
+.summary div { min-width: 0; border-left: 2px solid var(--ember); padding-left: 14px; }
+.summary dt { font: 500 0.75rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.summary dd { margin: 4px 0 0; max-width: 46ch; }
+.request { margin: 32px 0 0; font-weight: 500; }
+@media (max-width: 760px) { .summary { grid-template-columns: 1fr; } }
+
+.contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+.contact div { min-width: 0; }
+.contact .label { font: 500 0.75rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.contact .val { font-size: 1.05rem; margin-top: 4px; overflow-wrap: anywhere; }
+.todo { color: var(--ember-hi); font-family: var(--mono); font-size: 0.9rem; }
+
+.cta-wrap { margin: -8px 0 32px; }
+.cta { display: inline-block; background: var(--ember); color: #fff; font-weight: 700; text-decoration: none; padding: 12px 20px; border-radius: 4px; line-height: 1.35; }
+.cta:hover { background: var(--ember-hi); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cta { color: #102422; } }
+:root[data-theme="dark"] .cta { color: #102422; }
+.svc-link { margin: 14px 0 0; font-size: 0.95rem; }
+.contact-sec { background: var(--ground-2); }
+:root { --cta-text: #102422; }
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 28px; color: var(--muted); font-size: 0.85rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+@media (max-width: 760px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .hero .wrap { padding-block: 48px 110px; gap: 32px; }
+  .xsec { max-width: 340px; justify-self: start; }
+  .xsec-types { display: grid; grid-template-columns: 1fr 1fr; }
+  .xsec-types button { padding: 8px 6px; }
+  .services { grid-template-columns: 1fr; }
+    nav { display: none; }
+  .head-cta { font-size: 0.78rem; padding: 8px 10px; }
+  .head-cta .long { display: none; }
+  .head-cta .short { display: inline; }
+  .brand .han { font-size: 1.5rem; } .brand .word { font-size: 1.4rem; } .brand { gap: 10px; }
+}
+</style>
+</head>
+<body>
+<header class="top band">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Geofyre home">
+      <span class="han" lang="zh-Hant">榮</span>
+      <span class="dia" aria-hidden="true"></span>
+      <span class="word"><span class="ge">Ge</span><svg class="o" viewBox="0 0 100 100" aria-hidden="true"><g id="dots-sm"></g></svg>fyre</span>
+    </a>
+    <div class="head-right">
+    <nav aria-label="Sections">
+      <a href="#services">Services</a>
+      <a href="#work">Track record</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="head-cta" href="mailto:beckie@geofyre.com?subject=Appointment%3A%20interactive%20permit%20database"><span class="long">Contact to view demo of permit database</span><span class="short">Permit database demo</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero band">
+    <svg class="seabed" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><path class="fibre-line" d="M-40 90 C 260 108 520 72 820 97.2 S 1240 75.6 1480 90"/><path class="fibre-pulse" pathLength="1000" style="animation-delay:-0.0s;animation-duration:3.2s" d="M-40 90 C 260 108 520 72 820 97.2 S 1240 75.6 1480 90"/><path class="fibre-line" d="M-40 150 C 260 171 520 129 820 158.4 S 1240 133.2 1480 150"/><path class="fibre-pulse" pathLength="1000" style="animation-delay:-1.3s;animation-duration:4.1s" d="M-40 150 C 260 171 520 129 820 158.4 S 1240 133.2 1480 150"/><path class="fibre-line" d="M-40 205 C 260 229 520 181 820 214.6 S 1240 185.8 1480 205"/><path class="fibre-pulse" pathLength="1000" style="animation-delay:-0.6s;animation-duration:3.6s" d="M-40 205 C 260 229 520 181 820 214.6 S 1240 185.8 1480 205"/><path class="fibre-line" d="M-40 255 C 260 282 520 228 820 265.8 S 1240 233.4 1480 255"/><path class="fibre-pulse" pathLength="1000" style="animation-delay:-2.0s;animation-duration:4.6s" d="M-40 255 C 260 282 520 228 820 265.8 S 1240 233.4 1480 255"/><path class="fibre-line" d="M-40 300 C 260 330 520 270 820 312.0 S 1240 276.0 1480 300"/><path class="fibre-pulse" pathLength="1000" style="animation-delay:-0.9s;animation-duration:3.9s" d="M-40 300 C 260 330 520 270 820 312.0 S 1240 276.0 1480 300"/><path class="fibre-line" d="M-40 345 C 260 378 520 312 820 358.2 S 1240 318.6 1480 345"/><path class="fibre-pulse" pathLength="1000" style="animation-delay:-1.7s;animation-duration:4.3s" d="M-40 345 C 260 378 520 312 820 358.2 S 1240 318.6 1480 345"/><path class="fibre-line" d="M-40 395 C 260 431 520 359 820 409.4 S 1240 366.2 1480 395"/><path class="fibre-pulse" pathLength="1000" style="animation-delay:-0.3s;animation-duration:3.4s" d="M-40 395 C 260 431 520 359 820 409.4 S 1240 366.2 1480 395"/><path class="floor" d="M0 540 C 200 530 380 560 620 556 S 1000 540 1200 550 S 1400 538 1440 542 L1440 600 L0 600 Z"/><path class="cable-glow" d="M-20 520 C 200 545 340 560 560 556 S 900 548 1100 556 S 1340 545 1460 550"/><path class="cable" d="M-20 520 C 200 545 340 560 560 556 S 900 548 1100 556 S 1340 545 1460 550"/><rect class="rep" x="323" y="550" width="14" height="6" rx="3"/><rect class="rep" x="693" y="550" width="14" height="6" rx="3"/><rect class="rep" x="1053" y="550" width="14" height="6" rx="3"/></svg>
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Geofyre Pte. Ltd. · Singapore</div>
+        <h1>Connecting infrastructure, resources and opportunities</h1>
+        <p>Submarine cable route engineering, desktop studies and permit feasibility for telecommunications and power interconnector projects, and connecting clients with the people their projects need.</p>
+      </div>
+      <figure class="xsec">
+        <div class="xsec-types" role="radiogroup" aria-label="Cable type">
+          <button type="button" data-type="DA" aria-pressed="true">Double armoured</button>
+          <button type="button" data-type="SA" aria-pressed="false">Single armoured</button>
+          <button type="button" data-type="LWP" aria-pressed="false">Lightweight protected</button>
+          <button type="button" data-type="LW" aria-pressed="false">Lightweight</button>
+        </div>
+        <svg viewBox="0 0 100 100" role="group" aria-label="Cable cross-section"><g id="xsec"></g></svg>
+        <figcaption><span class="xsec-name" id="xsec-name"></span><span class="xsec-desc" id="xsec-desc"></span></figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="eyebrow">Services</div>
+      <h2>From desktop study to installation-ready route</h2>
+      <div class="services">
+        <div class="svc">
+          <h3>Cable route desktop studies</h3>
+          <p>Route options assessed against seabed geology, geohazards, environmental constraints, fishing and shipping activity, and third-party infrastructure, with a risk assessment for each route option.</p>
+          <p class="outputs"><b>Outputs</b> DTS report, route options, risk assessment, hazard maps, landfall assessments</p>
+        </div>
+        <div class="svc">
+          <h3>Route engineering</h3>
+          <p>Route design and refinement for fibre-optic and power cables, using survey data and ArcGIS Pro and MAKAI Plan.</p>
+          <p class="outputs"><b>Outputs</b> Route position lists (RPL), straight-line diagrams (SLD)</p>
+        </div>
+        <div class="svc">
+          <h3>Permit feasibility studies</h3>
+          <p>Permitting requirements researched jurisdiction by jurisdiction, with liaison with ministries, coastal authorities and maritime agencies.</p>
+          <p class="outputs"><b>Outputs</b> Permit matrices, decision flow charts, PFS report</p>
+          <p class="svc-link"><a href="mailto:beckie@geofyre.com?subject=Appointment%3A%20interactive%20permit%20database">Book an appointment to view the interactive permit database</a></p>
+        </div>
+        <div class="svc">
+          <h3>Site visits</h3>
+          <p>Landing site and landfall visits to check beach conditions, access, existing infrastructure and local constraints on the ground.</p>
+          <p class="outputs"><b>Outputs</b> Site visit reports, photo logs, landing site recommendations</p>
+        </div>
+        <div class="svc">
+          <h3>GIS and spatial data</h3>
+          <p>GIS project packages and spatial databases built and maintained over the project lifecycle.</p>
+          <p class="outputs"><b>Outputs</b> ArcGIS Pro packages, charts, data QC</p>
+        </div>
+        <div class="svc">
+          <h3>Resources</h3>
+          <p>Connecting clients with the people their project needs, such as survey contractors, cable suppliers, permitting agents, local partners and specialist consultants.</p>
+          <p class="outputs"><b>Outputs</b> Introductions, shortlists of contractors and partners</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sectors">
+    <div class="wrap">
+      <div class="eyebrow">Sectors</div>
+      <h2>Who the work is for</h2>
+      <ul class="sectors">
+        <li>Subsea telecommunications</li>
+        <li>Power interconnectors</li>
+        <li>Offshore renewables</li>
+        <li>Mining</li>
+        <li>Oil and gas</li>
+        <li>Environmental services</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="work" class="band">
+    <div class="wrap">
+      <div class="eyebrow">Track record</div>
+      <h2>More than 30 cable route studies globally</h2>
+      <dl class="summary">
+        <div><dt>Project types</dt><dd>Cable route desktop studies, route feasibility studies, permit feasibility studies, cable cut feasibility reports and landing site visits</dd></div>
+        <div><dt>Cable systems</dt><dd>International and domestic fibre-optic telecommunications cables, HVAC and HVDC power interconnectors</dd></div>
+        <div><dt>Regions</dt><dd>Southeast Asia, the South China Sea, East Asia, Australia and the Pacific, South Asia and the Middle East</dd></div>
+        <div><dt>Clients</dt><dd>Cable EPCI contractors, telecommunications operators, cable system consortia, power utilities and renewable energy developers</dd></div>
+      </dl>
+      <p class="request">A full project list is available on request.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-sec">
+    <div class="wrap">
+      <div class="eyebrow">Contact</div>
+      <h2>Discuss a route or a site</h2>
+      <p class="cta-wrap"><a class="cta" href="mailto:beckie@geofyre.com?subject=Appointment%3A%20interactive%20permit%20database">Click here for an appointment to view the interactive permit database</a></p>
+      <div class="contact">
+        <div><div class="label">Email</div><div class="val">beckie@geofyre.com</div></div>
+        <div><div class="label">Phone</div><div class="val">+65 8087 3880</div></div>
+        <div><div class="label">LinkedIn</div><div class="val"><a href="https://www.linkedin.com/company/geofyre" rel="noopener" target="_blank">Geofyre on LinkedIn</a></div></div>
+        <div><div class="label">Website</div><div class="val"><a href="https://geofyre.com">geofyre.com</a></div></div>
+        <div><div class="label">Office</div><div class="val">Singapore</div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Geofyre Pte. Ltd.</span>
+    <span>Singapore</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var cols = ["#FFB23F","#FFA437","#FF9630","#FF882A","#FF7A25","#F96C22","#F25F20","#F96C22","#FF7A25","#FF9630"];
+  function draw(id, r, rad, stagger) {
+    var g = document.getElementById(id); if (!g) return;
+    var ns = "http://www.w3.org/2000/svg";
+    for (var i = 0; i < 10; i++) {
+      var a = -Math.PI / 2 + i * Math.PI / 5;
+      var c = document.createElementNS(ns, "circle");
+      c.setAttribute("cx", (50 + r * Math.cos(a)).toFixed(2));
+      c.setAttribute("cy", (50 + r * Math.sin(a)).toFixed(2));
+      c.setAttribute("r", rad);
+      c.setAttribute("fill", cols[i]);
+      if (stagger) { c.setAttribute("class", "chase"); c.style.animationDelay = (i * 0.16) + "s"; }
+      g.appendChild(c);
+    }
+  }
+  draw("dots-sm", 38, 11, true);
+
+  // Interactive cable cross-section in the hero, with four cable types
+  var ns = "http://www.w3.org/2000/svg";
+  var root = document.getElementById("xsec");
+  var fig = root && root.closest("figure");
+  function el(tag, attrs, parent) { var e = document.createElementNS(ns, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function ring(n, r, rad, fill, parent, cls) { for (var i = 0; i < n; i++) { var a = i * 2 * Math.PI / n; var c = el("circle", { cx: (50 + r * Math.cos(a)).toFixed(2), cy: (50 + r * Math.sin(a)).toFixed(2), r: rad, fill: typeof fill === "function" ? fill(i) : fill }, parent); if (cls) { c.setAttribute("class", cls); c.style.animationDelay = (i * 0.3) + "s"; } } }
+  function band(r, w, stroke, parent, extra) { var a = { cx: 50, cy: 50, r: r, fill: "none", stroke: stroke, "stroke-width": w }; for (var k in extra || {}) a[k] = extra[k]; return el("circle", a, parent); }
+  var embers = ["#FFB23F", "#FF9630", "#FF7A25", "#F25F20"];
+  function ember(i) { return embers[i % 4]; }
+
+  // Shared core (fibres out to the polyethylene insulation, radius 30.5)
+  var core = [
+    { name: "Polyethylene insulation", desc: "Insulates the power conductor and keeps seawater out of the cable core.",
+      draw: function (g) { band(26.5, 7, "#e8efed", g, { "stroke-opacity": 0.85 }); }, hit: [22.5, 30.5] },
+    { name: "Copper conductor", desc: "Carries power from the shore stations to the repeaters along the route.",
+      draw: function (g) { band(21.5, 2.4, "#c87533", g); }, hit: [20, 23] },
+    { name: "Strength wires", desc: "High-tensile steel wires take the load while the cable is laid or recovered.",
+      draw: function (g) { ring(14, 15.6, 3.6, "#9db3af", g); }, hit: [11.5, 20] },
+    { name: "Steel tube", desc: "A gel-filled stainless steel tube holds and protects the fibres.",
+      draw: function (g) { el("circle", { cx: 50, cy: 50, r: 10.2, fill: "#0d1f1c", stroke: "#c9d4d1", "stroke-width": 1.6 }, g); }, hit: [9, 11.5] },
+    { name: "Optical fibres", desc: "Glass fibres carry the data as pulses of light.",
+      draw: function (g) { ring(8, 5.2, 1.7, "#ffb23f", g, "fibre"); el("circle", { cx: 50, cy: 50, r: 1.7, fill: "#ffb23f", "class": "fibre" }, g); }, hit: [0, 9] }
+  ];
+  var serving = function (r) { return { name: "Outer serving", desc: "Polypropylene yarn and bitumen bind the armour wires and protect them from abrasion.",
+      draw: function (g) { band(r, 2.6, "#5f7f77", g, { "stroke-dasharray": "1.6 1.1" }); }, hit: [r - 1.8, r + 1.8] }; };
+  var types = {
+    DA: { label: "Double armoured (DA)", desc: "Two layers of steel armour wires. Used in shallow water, near landings and on rocky seabed, where anchors and fishing gear are the main hazards.",
+      layers: [ serving(46.2),
+        { name: "Outer armour wires", desc: "The second layer of galvanised steel wires, laid in the opposite direction to the inner layer, for extra protection against anchors, trawl gear and abrasion on rock.",
+          draw: function (g) { ring(34, 41.3, 3.6, ember, g); }, hit: [37.6, 45] },
+        { name: "Inner armour wires", desc: "The first layer of galvanised steel armour wires.",
+          draw: function (g) { ring(30, 34.2, 3.1, function (i) { return embers[(i + 2) % 4]; }, g); }, hit: [31, 37.6] }
+      ].concat(core) },
+    SA: { label: "Single armoured (SA)", desc: "One layer of steel armour wires. Used on the continental shelf and slope, where fishing activity is a risk but anchor damage is less likely.",
+      layers: [ serving(41.4),
+        { name: "Armour wires", desc: "A single layer of galvanised steel wires protects the cable against fishing gear and abrasion.",
+          draw: function (g) { ring(25, 35.4, 4.2, ember, g); }, hit: [31, 40] }
+      ].concat(core) },
+    LWP: { label: "Lightweight protected (LWP)", desc: "A lightweight cable with an extra polyethylene jacket. Used in deep water where the seabed is rough or abrasion is a risk.",
+      layers: [
+        { name: "Protective jacket", desc: "An extra high-density polyethylene jacket, over a metallic tape screen, protects against abrasion and fish bite.",
+          draw: function (g) { band(34, 6.4, "#1b2b29", g); band(31.2, 0.9, "#c9d4d1", g); }, hit: [30.5, 37.5] }
+      ].concat(core) },
+    LW: { label: "Lightweight (LW)", desc: "No armour or extra jacket. Used in deep water, where there is little risk from fishing or anchors.",
+      layers: core.slice() }
+  };
+
+  var nameEl = document.getElementById("xsec-name"), descEl = document.getElementById("xsec-desc");
+  var buttons = fig ? fig.querySelectorAll(".xsec-types button") : [];
+  var current = "DA", groups = [], locked = null;
+  function show(i) {
+    var T = types[current];
+    groups.forEach(function (g, j) { g.classList.toggle("on", j === i); });
+    fig.classList.toggle("focus", i !== null);
+    nameEl.textContent = i === null ? T.label : T.layers[i].name;
+    descEl.textContent = i === null ? T.desc + " Hover over or tap a layer to see what it does." : T.layers[i].desc;
+  }
+  function render(type) {
+    current = type; locked = null; groups = [];
+    while (root.firstChild) root.removeChild(root.firstChild);
+    types[type].layers.forEach(function (L, i) {
+      var g = el("g", { "class": "layer", tabindex: 0, role: "button", "aria-label": L.name }, root);
+      L.draw(g);
+      var mid = (L.hit[0] + L.hit[1]) / 2, w = L.hit[1] - L.hit[0];
+      if (L.hit[0] === 0) el("circle", { cx: 50, cy: 50, r: L.hit[1], "class": "hit", style: "pointer-events:fill" }, g);
+      else el("circle", { cx: 50, cy: 50, r: mid, "class": "hit", style: "fill:none;stroke:transparent;stroke-width:" + w + ";pointer-events:stroke" }, g);
+      g.addEventListener("mouseenter", function () { if (locked === null) show(i); });
+      g.addEventListener("mouseleave", function () { if (locked === null) show(null); });
+      g.addEventListener("focus", function () { show(i); });
+      g.addEventListener("blur", function () { if (locked === null) show(null); });
+      g.addEventListener("click", function (e) { e.stopPropagation(); locked = locked === i ? null : i; show(locked); });
+      g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); locked = locked === i ? null : i; show(locked); } });
+      groups.push(g);
+    });
+    for (var b = 0; b < buttons.length; b++) buttons[b].setAttribute("aria-pressed", buttons[b].getAttribute("data-type") === type ? "true" : "false");
+    show(null);
+  }
+  if (root && fig) {
+    for (var b = 0; b < buttons.length; b++) buttons[b].addEventListener("click", function (e) { e.stopPropagation(); render(this.getAttribute("data-type")); });
+    document.addEventListener("click", function () { if (locked !== null) { locked = null; show(null); } });
+    render("DA");
+  }
+})();
+</script>
+</body>
+</html>
